@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube Games | Official Launch 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">CUBE<span>GAMES</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#gameGrid">Games</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#aboutUs">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="announcement-bar">🔥 LAUNCH SPECIAL: GET 5% EXTRA DIAMONDS ON ALL TOP-UPS! 💎</div>
+    <div id="notification-toast" class="toast"></div>
+    <div id="status-bar">
+        <span id="status-dot"></span> 
+        <span id="status-text">SYSTEM STATUS: ALL TOP-UPS ARE CURRENTLY INSTANT ✅</span>
+    </div>
+
+    <div class="top-controls">
+        <div class="theme-switch" onclick="toggleTheme()" title="Switch Theme">🌓</div>
+        <div class="cart-status pulsing-cart" onclick="openCart()">
+            🛒 <span class="cart-text">CHECKOUT:</span> <span id="cart-count">0</span>
+        </div>
+    </div>
+
+    <a href="https://wa.me/2349151827546" class="floating-wa" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Support">
+        <div class="wa-info">
+            <span>Chat Admin</span>
+            <small id="admin-online-status">● Online</small>
+        </div>
+    </a>
+
+    <header style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <div class="badge">🚀 OFFICIAL LAUNCH 2026 🇳🇬</div>
+            <h1>CUBE GAMES</h1>
+            <p>Nigeria's Fastest Top-Up Hub is Now LIVE!</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="calc-section">
+            <h3 style="margin-top:0; color:var(--primary-neon);">💎 Price Calculator</h3>
+            <p style="font-size: 11px; color: var(--text-dim); margin-top: -10px;">Orders over 2,000 units get a 5% discount!</p>
+            <div class="calc-grid">
+                <select id="calcGame" onchange="calculatePrice()">
+                    <option value="16">Free Fire (₦16/💎)</option>
+                    <option value="25">eFootball (₦25/🪙)</option>
+                    <option value="22">PUBG (₦22/UC)</option>
+                    <option value="20">CODM (₦20/CP)</option>
+                    <option value="18">DLS (₦18/💎)</option>
+                </select>
+                <input type="number" id="calcAmount" placeholder="Amount (e.g. 500)" onkeyup="calculatePrice()">
+            </div>
+            <div id="calcResult">Estimated Price: ₦0</div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="gameSearch" placeholder="Search for a game..." onkeyup="filterGames()">
+        </div>
+
+        <div class="game-grid" id="gameGrid">
+            <div class="game-card" onclick="openModal('Free Fire', ['100 Diamonds - ₦1,600', '210 Diamonds - ₦3,200', '530 Diamonds - ₦7,800', 'Weekly Membership - ₦2,800', 'Level Up Pass - ₦1,500', 'Free Fire Airdrop - ₦0'])">
+                <img src="https://img-cdn-sg.payermax.com/shoplay365/prod/upload/app-goods/freefire_appicon20241213090003604.png" class="game-icon-img">
+                <h3 class="game-name">Free Fire</h3>
+            </div>
+            <div class="game-card" onclick="openModal('eFootball', ['130 Coins - ₦1,850', '340 Coins - ₦4,500', '1040 Coins - ₦12,800', '2130 Coins - ₦24,500'])">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPVoiqntxOdwGFkT7midkw8xbImnIUMeHL_JVeakk0kyO04K9OmxuhFWQ&s=10" class="game-icon-img">
+                <h3 class="game-name">eFootball</h3>
+            </div>
+            <div class="game-card" onclick="openModal('DLS 26', ['400 Gems - ₦2,200', '1200 Gems - ₦5,800', '2500 Gems - ₦11,500'])">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEayW0Mo0uObboH7kC8DFHRK_MJM0CxOuMrg&s" class="game-icon-img">
+                <h3 class="game-name">DLS 26</h3>
+            </div>
+            <div class="game-card" onclick="openModal('CODM', ['80 CP - ₦1,650', '420 CP - ₦8,200', '880 CP - ₦16,500'])">
+                <img src="https://cdn.moogold.com/2022/03/call-of-duty-mobile-logo.jpg" class="game-icon-img">
+                <h3 class="game-name">CODM</h3>
+            </div>
+            <div class="game-card" onclick="openModal('PUBG Mobile', ['60 UC - ₦1,600', '325 UC - ₦7,500', '660 UC - ₦14,500'])">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4KChtUlCkYBJU451pxFocL4vnPGiYvDa-sA&s" class="game-icon-img">
+                <h3 class="game-name">PUBG</h3>
+            </div>
+            <div class="game-card" onclick="openModal('Blood Strike', ['100 Gold - ₦1,500', '500 Gold - ₦6,800', 'Strike Pass - ₦5,200'])">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPVgY9WkIyJa5z8Hnwk3dyuMGz60n7Hf4eqalYZx1JTW2uKKSNlYnVenY&s=10" class="game-icon-img">
+                <h3 class="game-name">Blood Strike</h3>
+            </div>
+        </div>
+
+        <section class="testimonials" id="testimonials">
+            <h2 style="text-align: center; margin-bottom: 30px;">What Gamers Say</h2>
+            <div class="testimonial-grid">
+                <div class="t-card"><p>"Fastest top-up in Nigeria. Got my diamonds in 2 mins!"</p><b>- Segun A.</b></div>
+                <div class="t-card"><p>"Trusted and reliable. Udom Samuel is the real deal."</p><b>- Chidi_Gamer</b></div>
+                <div class="t-card"><p>"Rates are much better than other hubs. 5 stars!"</p><b>- Bella_Gaming</b></div>
+            </div>
+        </section>
+
+        <section class="about-section" id="aboutUs">
+            <h2>Welcome to Cube Games</h2>
+            <p>Founded by <b>Udom Samuel Chukwuka</b>, we provide the best Naira rates for mobile gaming assets. Instant delivery, 24/7 support.</p>
+        </section>
+
+        <div class="history-section"><h2>Your Recent Orders</h2><div id="historyList"></div></div>
+
+        <div class="admin-panel" style="margin-top: 50px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
+            <button onclick="accessAdmin()" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:12px;">Admin Dashboard (Private)</button>
+            <div id="adminContent" style="display:none; margin-top:20px;">
+                <div style="background:var(--secondary-neon); padding:15px; border-radius:15px; text-align:center; color:white; margin-bottom:15px;">
+                    <p style="margin:0; opacity:0.8;">Total Revenue (Approved)</p>
+                    <h2 id="totalEarnings" style="margin:5px 0;">₦0</h2>
+                </div>
+                <div id="adminOrderList"></div>
+                <button onclick="logoutAdmin()" class="close-btn" style="width:100%; margin-top:10px; background:var(--error-red); border:none; height:40px; border-radius:10px; color:white;">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartOverlay" class="cart-modal"><div class="cart-content">
+        <h2>Your Cart</h2>
+        <div id="cartItemsList"></div>
+        
+        <div style="background:rgba(128,128,128,0.1); padding:15px; border-radius:12px; margin:15px 0;">
+            <p style="margin-bottom:10px; font-weight:bold; font-size:13px;">Choose Payment Method:</p>
+            <select id="paymentMethod" onchange="updatePaymentInfo()" style="margin-bottom:10px;">
+                <option value="opay">OPay (9050916159)</option>
+                <option value="palmpay">PalmPay (9151827546)</option>
+            </select>
+            <div id="paymentDisplay" style="font-size: 13px; text-align: left; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <b>Bank:</b> <span id="bankName">OPay</span><br>
+                <b>Name:</b> UDOM SAMUEL C.<br>
+                <b>Account:</b> <span id="bankAcct">9050916159</span>
+            </div>
+            <button onclick="copyCurrentBank()" style="background:var(--primary-neon); border:none; padding:8px 15px; border-radius:8px; font-size:11px; font-weight:bold; cursor:pointer; color:black; margin-top:10px; width:100%;">COPY ACCOUNT NUMBER</button>
+        </div>
+
+        <div style="font-size:11px; margin-bottom:15px; display:flex; gap:8px; text-align:left;">
+            <input type="checkbox" id="termsAgree" style="width:18px; height:18px;"> 
+            <label for="termsAgree">I confirm my Game ID is correct and I have made the payment.</label>
+        </div>
+        <button class="checkout-btn" onclick="processPayment()">SEND PROOF ON WHATSAPP</button>
+        <button class="close-btn" onclick="closeCart()" style="width:100%; margin-top:10px; height:45px; border:none; border-radius:10px; background:#333; color:white;">Back</button>
+    </div></div>
+
+    <div id="priceModal" class="modal"><div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <input type="text" id="playerID" placeholder="Enter Player ID">
+        <div id="extraFields" style="display:none;"><input type="text" id="orderNote" placeholder="Airdrop Price or Specific Request"></div>
+        <div id="priceOptions"></div>
+        <button class="close-btn" onclick="closeModal()" style="width:100%; height:45px; border:none; border-radius:10px; background:#333; color:white;">Cancel</button>
+    </div></div>
+
+    <div id="legalModal" class="modal"><div class="modal-content">
+        <h2 id="legalTitle"></h2>
+        <div id="legalBody" style="font-size:13px; color:var(--text-dim); line-height: 1.5; white-space: pre-line;"></div>
+        <button class="close-btn" onclick="closeLegal()" style="width:100%; margin-top:15px; height:40px; border:none; border-radius:10px; background:var(--primary-neon); color:black; font-weight:bold;">Close</button>
+    </div></div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="javascript:void(0)" onclick="openLegal('terms')">Terms of Service</a> | 
+            <a href="javascript:void(0)" onclick="openLegal('privacy')">Privacy Policy</a>
+        </div>
+        <p>© 2026 Cube Games. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
