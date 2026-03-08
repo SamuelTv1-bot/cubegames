@@ -43,7 +43,36 @@ header { height: 320px; display: flex; align-items: center; justify-content: cen
 .pulsing-cart { animation: pulse-green 2s infinite; }
 @keyframes pulse-green { 0% { transform: scale(1); } 70% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-.floating-wa { position: fixed; bottom: 20px; left: 20px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; z-index: 1500; display: flex; align-items: center; gap: 10px; font-weight: bold; }
+..floating-wa { 
+    position: fixed; 
+    bottom: 15px; 
+    left: 15px; 
+    background: var(--accent-green); 
+    color: white; 
+    padding: 8px 15px; 
+    border-radius: 50px; 
+    text-decoration: none; 
+    z-index: 1500; 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    font-weight: bold;
+    transform: scale(0.85); /* Shrinks the entire button by 15% */
+}
+
+.floating-wa img {
+    width: 20px; /* Smaller WhatsApp logo */
+    height: 20px;
+}
+
+.wa-info span {
+    font-size: 12px; /* Smaller text */
+}
+
+.wa-info small {
+    font-size: 9px;
+}
+
 
 .modal, .cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
 .modal-content, .cart-content { background: var(--bg-dark); padding: 25px; border-radius: 25px; width: 90%; max-width: 400px; border: 1px solid var(--glass-border); text-align: center; }
