@@ -6,39 +6,38 @@
     <title>Cube Games | Official Launch 2026</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<!-- Educational Disclaimer Banner -->
-<div style="background-color: #fff3cd; color: #856404; border-bottom: 2px solid #ffeeba; text-align: center; padding: 12px 20px; font-family: sans-serif; font-size: 14px; line-height: 1.5; font-weight: bold; z-index: 9999; position: relative;">
-    ⚠️ STUDENT PORTFOLIO PROJECT: This website is a frontend development practice project built for educational purposes only. It does not process real transactions, handle top-ups, or collect user credentials. No data is transmitted or stored.
-</div>
-    
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">CUBE<span>GAMES</span></div>
-            <ul class="nav-links">
-                <li><a href="#" onclick="closePanel()">Home</a></li>
-                <li><a href="#gameGrid" onclick="closePanel()">Games</a></li>
-                <li><a href="#testimonials">Reviews</a></li>
-                <li><a href="#aboutUs">About</a></li>
-            </ul>
-        </div>
-    </nav>
+<body id="home">
 
-    <div id="announcement-bar">🔥 LAUNCH SPECIAL: GET 5% EXTRA DIAMONDS ON ALL TOP-UPS! 💎</div>
-    <div id="notification-toast" class="toast"></div>
+    <header class="site-header">
+        <div id="announcement-bar">
+            <p>🔥 LAUNCH SPECIAL: GET 5% EXTRA DIAMONDS ON ALL TOP-UPS! 💎</p>
+        </div>
+        <nav class="main-nav" aria-label="Main navigation">
+            <div class="nav-container">
+                <a class="logo" href="#home" aria-label="Cube Games home">CUBE<span>GAMES</span></a>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#gameGrid">Games</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#aboutUs">About</a></li>
+                </ul>
+                <div class="top-controls">
+                    <button type="button" class="theme-switch" onclick="toggleTheme()" title="Switch Theme" aria-label="Switch theme">🌓</button>
+                    <button type="button" class="cart-status pulsing-cart" onclick="openCart()" aria-label="Open checkout">
+                        <span aria-hidden="true">🛒</span> <span class="cart-text">CHECKOUT</span> <span id="cart-count" aria-live="polite">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="notification-toast" class="toast" role="status" aria-live="polite"></div>
     <div id="status-bar">
         <span id="status-dot"></span> 
         <span id="status-text">SYSTEM STATUS: ALL TOP-UPS ARE CURRENTLY INSTANT ✅</span>
     </div>
 
-    <div class="top-controls">
-        <div class="theme-switch" onclick="toggleTheme()" title="Switch Theme">🌓</div>
-        <div class="cart-status pulsing-cart" onclick="openCart()">
-            🛒 <span class="cart-text">CHECKOUT:</span> <span id="cart-count">0</span>
-        </div>
-    </div>
-
-    <a href="https://wa.me/2349151827546" class="floating-wa" target="_blank">
+    <a href="https://wa.me/2349151827546" class="floating-wa" target="_blank" rel="noopener noreferrer">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Support">
         <div class="wa-info">
             <span>Chat Admin</span>
@@ -46,79 +45,67 @@
         </div>
     </a>
 
-    <header style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center;">
-        <div class="header-overlay"></div>
+    <section class="hero" aria-labelledby="heroTitle">
+        <div class="header-overlay" aria-hidden="true"></div>
         <div class="header-content">
             <div class="badge">🚀 OFFICIAL LAUNCH 2026 🇳🇬</div>
-            <h1>CUBE GAMES</h1>
+            <h1 id="heroTitle">CUBE GAMES</h1>
             <p>Nigeria's Fastest Top-Up Hub is Now LIVE!</p>
         </div>
-    </header>
+    </section>
 
-    <div class="container">
-        
-        <div class="calc-section" id="calcSection">
-            <h3 style="margin-top:0; color:var(--primary-neon);">💎 Price Calculator</h3>
-            <p style="font-size: 11px; color: var(--text-dim); margin-top: -10px;">Orders over 2,000 units get a 5% discount!</p>
+    <main class="container">
+        <section class="calc-section" aria-labelledby="calculatorTitle">
+            <h2 id="calculatorTitle">💎 Price Calculator</h2>
+            <p class="calc-description">Orders of 2,000 units or more get a 5% discount!</p>
             <div class="calc-grid">
-                <select id="calcGame" onchange="calculatePrice()">
-                    <option value="16">Free Fire (₦16/💎)</option>
-                    <option value="25">eFootball (₦25/🪙)</option>
-                    <option value="22">PUBG (₦22/UC)</option>
-                    <option value="20">CODM (₦20/CP)</option>
-                    <option value="18">DLS (₦18/💎)</option>
-                </select>
-                <input type="number" id="calcAmount" placeholder="Amount (e.g. 500)" onkeyup="calculatePrice()">
+                <div class="form-field">
+                    <label for="calcGame">Game</label>
+                    <select id="calcGame" onchange="calculatePrice()">
+                        <option value="16">Free Fire (₦16/💎)</option>
+                        <option value="25">eFootball (₦25/🪙)</option>
+                        <option value="22">PUBG (₦22/UC)</option>
+                        <option value="20">CODM (₦20/CP)</option>
+                        <option value="18">DLS (₦18/💎)</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="calcAmount">Units</label>
+                    <input type="number" id="calcAmount" min="0" step="1" inputmode="numeric" placeholder="Amount (e.g. 500)" oninput="calculatePrice()">
+                </div>
             </div>
-            <div id="calcResult">Estimated Price: ₦0</div>
-        </div>
+            <div id="calcResult" role="status" aria-live="polite">Estimated Price: ₦0</div>
+        </section>
 
-        <div class="search-container" id="searchContainer">
-            <input type="text" id="gameSearch" placeholder="Search for a game..." onkeyup="filterGames()">
+        <div class="search-container">
+            <label class="sr-only" for="gameSearch">Search games</label>
+            <input type="search" id="gameSearch" placeholder="Search for a game..." oninput="filterGames()">
         </div>
 
         <div class="game-grid" id="gameGrid">
-            <div class="game-card" onclick="openPanel('Free Fire', ['100 Diamonds - ₦1,600', '210 Diamonds - ₦3,200', '530 Diamonds - ₦7,800', '1000 Diamonds - ₦16,000', '2000 Diamonds - ₦31,800', 'Weekly Membership - ₦3,200', 'Level Up Pass - ₦7,100', 'Free Fire Airdrop - ₦0'])">
-                <img src="https://img-cdn-sg.payermax.com/shoplay365/prod/upload/app-goods/freefire_appicon20241213090003604.png" class="game-icon-img">
-                <h3 class="game-name">Free Fire</h3>
-            </div>
-            <div class="game-card" onclick="openPanel('eFootball', ['137 Coins - ₦2,100', '315 Coins - ₦4,800', '578 Coins - ₦8,400', '788 Coins - ₦11,500', '1092 Coins - ₦16,000', '2237 Coins - ₦32,000', '3413 Coins - ₦46,500', '5985 Coins - ₦76,500'])">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPVoiqntxOdwGFkT7midkw8xbImnIUMeHL_JVeakk0kyO04K9OmxuhFWQ&s=10" class="game-icon-img">
-                <h3 class="game-name">eFootball</h3>
-            </div>
-            <div class="game-card" onclick="openPanel('DLS 26', ['90 Diamonds - ₦4,400', '900 Coins - ₦4,400', 'Season pass - ₦9,900', '1750 coins - ₦10,450', '400 Diamonds - ₦16,500', '3000 Coins - ₦18,150', 'Premium Season Pass - ₦22,000', '5000 Coins - ₦22,000', '910 Diamonds - ₦33,000', '2700 Diamonds - ₦77,000', '9000 Coins - ₦85,000', '6000 Diamonds - ₦150,000'])">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEayW0Mo0uObboH7kC8DFHRK_MJM0CxOuMrg&s" class="game-icon-img">
-                <h3 class="game-name">DLS 26</h3>
-            </div>
-            <div class="game-card" onclick="openPanel('CODM', ['30 CP - ₦660', '80 CP - ₦1,650', '420 CP - ₦8,250', '880 CP - ₦16,500', '2400 CP - ₦41,250', '5000 CP - ₦82,500', '10800 CP - ₦160,000', 'Battle Pass - ₦7,400', 'Battle Pass Bundle - ₦18,150'])">
-                <img src="https://cdn.moogold.com/2022/03/call-of-duty-mobile-logo.jpg" class="game-icon-img">
-                <h3 class="game-name">CODM</h3>
-            </div>
-            <div class="game-card" onclick="openPanel('PUBG Mobile', ['60 UC - ₦2,145', '300 + 25 UC - ₦9,075', '600 + 60 UC - ₦17,600', '1,500 + 300 - ₦42,350', '3,000 + 850 UC - ₦85,250', '6,000 + 2,100 UC - ₦85,650'])">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4KChtUlCkYBJU451pxFocL4vnPGiYvDa-sA&s" class="game-icon-img">
-                <h3 class="game-name">PUBG</h3>
-            </div>
-            <div class="game-card" onclick="openPanel('Blood Strike', ['100 Gold - ₦1,500', '500 Gold - ₦6,800', 'Strike Pass - ₦5,200'])">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPVgY9WkIyJa5z8Hnwk3dyuMGz60n7Hf4eqalYZx1JTW2uKKSNlYnVenY&s=10" class="game-icon-img">
-                <h3 class="game-name">Blood Strike</h3>
-            </div>
-        </div>
-
-        <div id="game-detail-panel" style="display: none; padding: 20px; animation: fadeIn 0.3s ease; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--primary-neon);">
-            <button onclick="closePanel()" style="background: #333; color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-weight: bold;">
-                ← Back to Games
+            <button type="button" class="game-card" data-game="Free Fire" onclick="openModal('Free Fire', ['100 Diamonds - ₦1,600', '210 Diamonds - ₦3,200', '530 Diamonds - ₦7,800', 'Weekly Membership - ₦2,800', 'Level Up Pass - ₦1,500', 'Free Fire Airdrop - ₦0'], this)">
+                <img src="assets/games/free-fire.png" class="game-icon-img" alt="Free Fire logo" width="70" height="70">
+                <span class="game-name">Free Fire</span>
             </button>
-            
-            <h2 id="panel-title" style="color: var(--primary-neon); margin-bottom: 5px;">Game Title</h2>
-            <p style="color: var(--text-dim); font-size: 13px; margin-bottom: 20px;">Select a package and enter your details below.</p>
-
-            <input type="text" id="playerID" placeholder="Enter Player ID" style="width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #444; background: rgba(0,0,0,0.5); color: white; margin-bottom: 20px; box-sizing: border-box; font-size: 16px;">
-
-            <div id="panel-price-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;">
-                </div>
-
-            <button class="buy-now" onclick="proceedToCheckout()" style="width: 100%; padding: 15px; background: var(--primary-neon); color: black; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; font-size: 16px;">
-                Proceed to Payment
+            <button type="button" class="game-card" data-game="eFootball" onclick="openModal('eFootball', ['137 Coins - ₦2,100', '315 Coins - ₦4,800', '578 Coins - ₦8,400', '788 Coins - ₦11,500', '1092 Coins - ₦16,000', '2237 Coins - ₦32,000', '3413 Coins - ₦46,500', '5985 Coins - ₦76,500'], this)">
+                <img src="assets/games/efootball.jpg" class="game-icon-img" alt="eFootball logo" width="70" height="70">
+                <span class="game-name">eFootball</span>
+            </button>
+            <button type="button" class="game-card" data-game="DLS 26" onclick="openModal('DLS 26', ['90 Diamonds - ₦4,400', '900 Coins - ₦4,400', 'Season pass - ₦9,900', '1750 coins - ₦10,450', '400 Diamonds - ₦16,500', '3000 Coins - ₦18,150', 'Premium Season Pass - ₦22,000', '5000 Coins - ₦22,000', '910 Diamonds - ₦33,000', '2700 Diamonds - ₦77,000', '9000 Coins - ₦85,000', '6000 Diamonds - ₦150,000'], this)">
+                <img src="assets/games/dls-26.jpg" class="game-icon-img" alt="DLS 26 logo" width="70" height="70">
+                <span class="game-name">DLS 26</span>
+            </button>
+            <button type="button" class="game-card" data-game="CODM" onclick="openModal('CODM', ['30 CP - ₦660', '80 CP - ₦1,650', '420 CP - ₦8,250', '880 CP - ₦16,500', '2400 CP -₦41,250', '5000 CP - ₦82,500', '10800 CP - ₦160,000', 'Battle Pass - ₦7,400', 'Battle Pass Bundle - ₦18,150'], this)">
+                <img src="assets/games/codm.jpg" class="game-icon-img" alt="Call of Duty Mobile logo" width="70" height="70">
+                <span class="game-name">CODM</span>
+            </button>
+            <button type="button" class="game-card" data-game="PUBG Mobile" onclick="openModal('PUBG Mobile', ['60 UC - ₦2,145', '300 + 25 UC - ₦9,075', '600 + 60 UC - ₦17,600', '1,500 + 300 - ₦42,350', '3,000 + 850 UC - ₦85,250', '6,000 + 2,100 UC - ₦85,650'], this)">
+                <img src="assets/games/pubg-mobile.jpg" class="game-icon-img" alt="PUBG Mobile logo" width="70" height="70">
+                <span class="game-name">PUBG</span>
+            </button>
+            <button type="button" class="game-card" data-game="Blood Strike" onclick="openModal('Blood Strike', ['100 Gold - ₦1,500', '500 Gold - ₦6,800', 'Strike Pass - ₦5,200'], this)">
+                <img src="assets/games/blood-strike.jpg" class="game-icon-img" alt="Blood Strike logo" width="70" height="70">
+                <span class="game-name">Blood Strike</span>
             </button>
         </div>
 
@@ -136,10 +123,7 @@
             <p>Founded by <b>Udom Samuel C.</b>, we provide the best Naira rates for mobile gaming assets. Instant delivery, 24/7 support.</p>
         </section>
 
-        <div class="history-section" id="historyContainer">
-            <h2>Your Recent Orders</h2>
-            <div id="historyList"></div>
-        </div>
+        <div class="history-section"><h2>Your Recent Orders</h2><div id="historyList"></div></div>
 
         <div class="admin-panel" style="margin-top: 50px; border-top: 1px solid var(--glass-border); padding-top: 20px;">
             <button onclick="accessAdmin()" style="background:none; border:none; color:var(--text-dim); cursor:pointer; font-size:12px;">Admin Dashboard (Private)</button>
@@ -149,63 +133,78 @@
                     <h2 id="totalEarnings" style="margin:5px 0;">₦0</h2>
                 </div>
                 <div id="adminOrderList"></div>
-                <button onclick="logoutAdmin()" class="close-btn" style="width:100%; margin-top:10px; background:var(--error-red); border:none; height:40px; border-radius:10px; color:white; cursor:pointer;">Logout</button>
+                <button onclick="logoutAdmin()" class="close-btn" style="width:100%; margin-top:10px; background:var(--error-red); border:none; height:40px; border-radius:10px; color:white;">Logout</button>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div id="cartOverlay" class="cart-modal">
-        <div class="cart-content">
-            <h2>Your Cart</h2>
-            <div id="cartItemsList"></div>
-            
-            <div style="background:rgba(128,128,128,0.1); padding:15px; border-radius:12px; margin:15px 0;">
-                <p style="margin-bottom:10px; font-weight:bold; font-size:13px;">Choose Payment Method:</p>
-                <select id="paymentMethod" onchange="updatePaymentInfo()" style="margin-bottom:10px;">
-                    <option value="opay">OPay (9050916159)</option>
-                    <option value="palmpay">PalmPay (9151827546)</option>
-                </select>
-                <div id="paymentDisplay" style="font-size: 13px; text-align: left; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
-                    <b>Bank:</b> <span id="bankName">OPay</span><br>
-                    <b>Name:</b> UDOM SAMUEL C.<br>
-                    <b>Account:</b> <span id="bankAcct">9050916159</span>
+    <div id="cartOverlay" class="cart-modal"><div class="cart-content">
+        <h2>Your Cart</h2>
+        <div id="cartItemsList"></div>
+        
+        <div style="background:rgba(128,128,128,0.1); padding:15px; border-radius:12px; margin:15px 0;">
+            <p style="margin-bottom:10px; font-weight:bold; font-size:13px;">Choose Payment Method:</p>
+            <select id="paymentMethod" onchange="updatePaymentInfo()" style="margin-bottom:10px;">
+                <option value="opay">OPay (9050916159)</option>
+                <option value="palmpay">PalmPay (9151827546)</option>
+            </select>
+            <div id="paymentDisplay" style="font-size: 13px; text-align: left; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                <b>Bank:</b> <span id="bankName">OPay</span><br>
+                <b>Name:</b> UDOM SAMUEL C.<br>
+                <b>Account:</b> <span id="bankAcct">9050916159</span>
+            </div>
+            <button onclick="copyCurrentBank()" style="background:var(--primary-neon); border:none; padding:8px 15px; border-radius:8px; font-size:11px; font-weight:bold; cursor:pointer; color:black; margin-top:10px; width:100%;">COPY ACCOUNT NUMBER</button>
+        </div>
+
+        <div style="font-size:11px; margin-bottom:15px; display:flex; gap:8px; text-align:left;">
+            <input type="checkbox" id="termsAgree" style="width:18px; height:18px;"> 
+            <label for="termsAgree">I confirm my Game ID is correct and I have made the payment.</label>
+        </div>
+        <button class="checkout-btn" onclick="processPayment()">SEND PROOF ON WHATSAPP</button>
+        <button class="close-btn" onclick="closeCart()" style="width:100%; margin-top:10px; height:45px; border:none; border-radius:10px; background:#333; color:white;">Back</button>
+    </div></div>
+
+    <dialog id="priceModal" class="game-modal modal-content" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <img id="modalGameIcon" class="modal-game-icon" alt="" width="64" height="64" hidden>
+            <span id="modalLogoFallback" class="modal-logo-fallback" aria-hidden="true" hidden></span>
+            <div>
+                <p class="modal-eyebrow">Choose your top-up</p>
+                <h2 id="modalTitle"></h2>
+            </div>
+        </div>
+        <div class="modal-fields">
+            <div class="form-field">
+                <label for="playerID">Player ID</label>
+                <input type="text" id="playerID" placeholder="Enter Player ID" autocomplete="off" required aria-describedby="playerIDHint playerIDError" oninput="clearPlayerIDError()">
+                <p id="playerIDHint" class="form-hint">Use the ID from your game profile.</p>
+                <p id="playerIDError" class="form-error" role="alert" hidden>Enter Player ID before selecting a top-up.</p>
+            </div>
+            <div id="extraFields" style="display:none;">
+                <div class="form-field">
+                    <label for="orderNote">Order note</label>
+                    <input type="text" id="orderNote" placeholder="Airdrop Price or Specific Request">
                 </div>
-                <button onclick="copyCurrentBank()" style="background:var(--primary-neon); border:none; padding:10px 15px; border-radius:8px; font-size:11px; font-weight:bold; cursor:pointer; color:black; margin-top:10px; width:100%;">COPY ACCOUNT NUMBER</button>
             </div>
-
-            <div style="font-size:11px; margin-bottom:15px; display:flex; gap:8px; text-align:left;">
-                <input type="checkbox" id="termsAgree" style="width:18px; height:18px;"> 
-                <label for="termsAgree">I confirm my Game ID is correct and I have made the payment.</label>
-            </div>
-            <button class="checkout-btn" onclick="processPayment()">SEND PROOF ON WHATSAPP</button>
-            <button class="close-btn" onclick="closeCart()" style="width:100%; margin-top:10px; height:45px; border:none; border-radius:10px; background:#333; color:white; cursor:pointer;">Back</button>
         </div>
-    </div>
+        <div id="priceOptions" class="price-options" role="group" aria-label="Top-up options"></div>
+        <button type="button" class="close-btn" onclick="closeModal()">Cancel</button>
+    </dialog>
 
-    <div id="legalModal" class="modal">
-        <div class="modal-content">
-            <h2 id="legalTitle"></h2>
-            <div id="legalBody" style="font-size:13px; color:var(--text-dim); line-height: 1.5; white-space: pre-line; margin-top:15px; text-align:left;"></div>
-            <button class="close-btn" onclick="closeLegal()" style="width:100%; margin-top:20px; height:40px; border:none; border-radius:10px; background:var(--primary-neon); color:black; font-weight:bold; cursor:pointer;">Close</button>
-        </div>
-    </div>
+    <div id="legalModal" class="modal"><div class="modal-content">
+        <h2 id="legalTitle"></h2>
+        <div id="legalBody" style="font-size:13px; color:var(--text-dim); line-height: 1.5; white-space: pre-line;"></div>
+        <button class="close-btn" onclick="closeLegal()" style="width:100%; margin-top:15px; height:40px; border:none; border-radius:10px; background:var(--primary-neon); color:black; font-weight:bold;">Close</button>
+    </div></div>
 
     <footer>
-        <div class="footer-cta">
-            <p>Need help with a top-up?</p>
-            <a href="https://wa.me/2349151827546" class="footer-wa-btn" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" style="width:18px; vertical-align:middle; margin-right:8px;">
-                Chat on WhatsApp
-            </a>
-        </div>
         <div class="footer-links">
             <a href="javascript:void(0)" onclick="openLegal('terms')">Terms of Service</a> | 
             <a href="javascript:void(0)" onclick="openLegal('privacy')">Privacy Policy</a>
         </div>
-        <p style="margin-top: 20px; font-size: 12px; opacity: 0.6;">© 2026 Cube Games. All Rights Reserved.</p>
+        <p>© 2026 Cube Games. All Rights Reserved.</p>
     </footer>
 
     <script src="script.js"></script>
 </body>
-                </html>
-                
+</html>
